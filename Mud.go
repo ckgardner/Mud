@@ -384,9 +384,10 @@ func main() {
 						log.Fatalf("Error logging in the user: %v", err)
 					}
 					if correctPW == false{
-						fmt.Fprint(conn, "Password Incorrect, try again")
+						fmt.Fprint(conn, "Password Incorrect, try again.\n")
+					}else{
+						break
 					}
-					break
 				}
 			}else{
 				tx3, err := db.Begin()
@@ -458,9 +459,8 @@ func socialCommands() {
 	addCommand("look", cmdLook)
 	addCommand("gossip", cmdGossip)
 	addCommand("say", cmdSay)
-	// addCommand("tell", cmdTell)
-	// addCommand("shout", cmdShout)
-	// addCommand("where", cmdWhere)
+	addCommand("tell", cmdTell)
+	addCommand("shout", cmdShout)
 }
 func directionalCommands() {
 	addCommand("look north", cmdLookNorth)
@@ -496,7 +496,7 @@ func cmdSmile(player *Player, cmd []string) {
 func cmdLaugh(player *Player, cmd []string) {
 	for _, otherplayer := range players{
 		if otherplayer.Location.Zone.ID == player.Location.Zone.ID{
-			otherplayer.Printf("%v [LOL] at %v \n", player.Name, player.Location)
+			otherplayer.Printf("%v [LOL] at %v \n", player.Name);
 		}
 	}
 	fmt.Printf("You laugh out loud.\n")
